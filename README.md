@@ -1,0 +1,7 @@
+# suraj__changes_flask
+
+Login to server as root user and perform below configurationa. Move your project to /var/www/scoreprojectsudo cp score_apa /var/www/scoreproject/1. Add below to /etc/apache2/sites-available/testscore.conf
+<VirtualHost *:80>   
+ServerName testscore    
+ServerAdmin webmaster@testscore.com   
+WSGIScriptAlias / /var/www/scoreproject/score_apa/score/project/score.wsgi    ErrorLog /var/www/scoreproject/score_apa/score/project/logs/error.log    CustomLog /var/www/scoreproject/score_apa/score/project/logs/access.log combined    WSGIDaemonProcess testscore python-path=/var/www/scoreproject/score_apa/score/project:/var/www/scoreproject/score_apa/score/project/venv/lib/python3.4/site-packages    WSGIProcessGroup testscore    <Directory /var/www/scoreproject/score_apa/score/project>        WSGIProcessGroup testscore        WSGIApplicationGroup %{GLOBAL}        Order deny,allow        Allow from all    </Directory></VirtualHost>2. RUN - sudo a2ensite testscore.conf3. Add this to /etc/hosts    127.0.0.1 testscore4. Create log directory     sudo mkdir -p /var/www/scoreproject/score_apa/score/project/logs5. Change the owner    sudo chown -R www-data:www-data testscore6. Activate virtual env  a. cd /var/www/scoreproject/score_apa/score/project b. source venv/bin/activate7. Install application dependency likepip3 install flaskInstall other dependency which is needed for application6. Restart sudo /etc/init.d/apache2 restartI have also updated wsgi file.Sending you updated folder use it as is.
